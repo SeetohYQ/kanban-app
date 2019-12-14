@@ -3,7 +3,7 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  serverUri: 'https://cors-anywhere.herokuapp.com/https://my-kanban-app-server.herokuapp.com',
+  serverUri: 'https://my-kanban-app-server.herokuapp.com',
   production: false
 };
 
