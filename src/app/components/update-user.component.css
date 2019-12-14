@@ -1,0 +1,28 @@
+.form-container {
+    position: relative;
+    left: 20vw;
+    width: 60vw;
+    padding: 16px;
+    z-index: 100;
+    background: white;
+}
+
+.form-contents {
+    display: flex;
+    flex-direction: column;
+}
+
+.passwords-field {
+    display: flex;
+    flex-direction: column;
+}
+
+.photo-holder {
+    text-align: center;
+}
+
+.portrait-photo {
+    max-width: 20vw;
+    max-height: 20vh;
+    border-radius: 50%;
+}

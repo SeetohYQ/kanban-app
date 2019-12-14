@@ -1,0 +1,23 @@
+<mat-toolbar color="primary" style="margin-bottom: 2vw">
+    <mat-toolbar-row class="header">
+        <div class="app-details">
+            <img src="../../assets/app-logo.jpg" class="app-logo" style="cursor:pointer" [routerLink]="['/taskboards']">    
+            <h1>Kanban</h1>
+        </div>
+        <div class="profile">
+            <img class="profile-pic" [attr.src]="profilePicUrl">
+            <span>{{username}}</span>
+            <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+                <mat-icon>more_vert</mat-icon>
+            </button>
+            <mat-menu #menu="matMenu">
+                <button mat-menu-item [routerLink]="['/user','update']">
+                    <span>Update profile</span>
+                </button>
+                <button mat-menu-item (click)="logout()">
+                    <span>Log out</span>
+                </button>
+            </mat-menu>
+        </div>
+    </mat-toolbar-row>
+</mat-toolbar>

@@ -1,0 +1,76 @@
+
+<mat-accordion style="cursor: pointer;" *ngIf="!!task" hideToggle="true">
+    <mat-expansion-panel>
+        <mat-expansion-panel-header>
+            <mat-panel-title class="task_panel">
+                <div class="left_of_task_panel">
+                    <img [attr.src]="assignedToPic" *ngIf="assignedToPic != 'https://free-images.sgp1.digitaloceanspaces.com/profiles/'" 
+                    class="assigned-to-portrait"  alt="">
+                    <strong>{{taskForm.get('title').value}}</strong>
+                </div>
+                <div>
+                    <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+                        <mat-icon>more_vert</mat-icon>
+                    </button>
+                    <mat-menu #menu="matMenu">
+                        <button mat-menu-item [disabled]="task.status === 'planned'" (click)="updateProgress('planned')"><span class="planned-dot"></span>Planned</button>
+                        <button mat-menu-item [disabled]="task.status === 'wip'" (click)="updateProgress('wip')"><span class="progress-dot"></span>In progress</button>
+                        <button mat-menu-item [disabled]="task.status === 'completed'" (click)="updateProgress('completed')"><span class="completed-dot"></span>Completed</button>
+                    </mat-menu>
+                </div>
+            </mat-panel-title>
+        </mat-expansion-panel-header>
+    
+        <form [formGroup]="taskForm" (ngSubmit)="updateTaskDetails()" style="display:flex; flex-direction: column; cursor: pointer;">
+            <mat-form-field>
+                <input matInput formControlName="title" placeholder="title">
+                <mat-error>Required field</mat-error>
+            </mat-form-field>
+
+            <mat-form-field>
+                <input matInput formControlName="description" placeholder="Description (optional)">
+            </mat-form-field>
+
+            <div>
+                <button mat-flat-button type="button" (click)="addToCheckList()" *ngIf="checkList.length === 0"
+                    class="btn-left-text">
+                    <mat-icon>add_circle_outline</mat-icon>
+                    <span>Add checklist</span>
+                </button>
+                <div formArrayName="checkList" *ngFor="let cl of checkList.controls; let i = index">
+                    <div style="display: flex; flex-direction: row;" [formGroup]="cl">
+                        <mat-checkbox formControlName="completed" color="primary"></mat-checkbox> 
+                        <input formControlName="list_item" matInput>
+                        <mat-icon (click)="deleteFromCheckList(i)">delete</mat-icon>
+                    </div>
+                </div>
+                <button mat-flat-button type="button" (click)="addToCheckList()" *ngIf="checkList.length > 0"
+                    class="btn-left-text">
+                    <mat-icon>add_circle_outline</mat-icon>
+                    <span>Next item</span>
+                </button>
+            </div>
+
+            <mat-form-field>
+                <input matInput [matDatepicker]="picker" formControlName="dueDate" placeholder="Due Date">
+                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+                <mat-error>Due date should be after today.</mat-error>
+            </mat-form-field>
+
+            <mat-form-field>
+                <mat-label>Assign to </mat-label>
+                <mat-select formControlName="assignedTo">
+                    <mat-option *ngFor="let p of teamProfiles" [value]="p.username">{{p.username}}</mat-option>
+                </mat-select>
+            </mat-form-field>
+        
+            <div class="task-btns">
+                <button mat-flat-button color="warn" type="button" (click)="openDialog()">Delete</button>
+                <button mat-flat-button color="primary" type="submit" [disabled]="!taskForm.valid">Save</button>
+            </div>
+
+        </form>
+    </mat-expansion-panel>
+</mat-accordion>
+            

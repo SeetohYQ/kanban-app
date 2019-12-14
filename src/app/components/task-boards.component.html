@@ -1,0 +1,6 @@
+<app-header></app-header>
+<div>
+    <button mat-raised-button style="margin-left:2vw" (click)="createTaskboard()">+ Create Taskboard</button>
+    <app-task-board *ngFor="let taskBoard of taskBoards" [taskBoard]="taskBoard"></app-task-board>
+    <router-outlet></router-outlet>
+</div>

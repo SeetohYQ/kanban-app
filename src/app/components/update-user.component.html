@@ -1,0 +1,34 @@
+<app-header></app-header>
+<form [formGroup]="userForm" (ngSubmit)="processForm()" class="form-container">
+    <div class="form-contents">
+        <h2 style="text-align: center;">Update account details</h2>
+        <div class="photo-holder">
+            <img [attr.src]="profilePic" class="portrait-photo" alt="">
+            <br><span>{{username}}</span>
+        </div>
+
+        <mat-form-field>
+            <input matInput formControlName="password" placeholder="New password" type="password">
+            <mat-error>Required field</mat-error>
+        </mat-form-field>
+            
+        <mat-form-field>
+            <input matInput formControlName="confirmPassword" placeholder="Confirm new password" type="password"  
+            [errorStateMatcher]="errorMatcher">
+            <mat-error *ngIf="userForm.hasError('passwordsMismatch')">Passwords do not match</mat-error>
+        </mat-form-field>
+
+        <mat-form-field>
+            <input matInput formControlName="email" placeholder="Email">
+            <mat-error>Required field/invalid email</mat-error>
+        </mat-form-field>
+                
+        <mat-label>Profile picture (required)</mat-label>
+
+        <input type="file" formControlName="profilePic" accept="image/*" (change)="newFile($event)"/>
+        <img [attr.src]="uploadedImageUrl" height="220" width="220" *ngIf="!!uploadedImageUrl"  alt="">
+        
+        <button mat-flat-button color="primary" type="submit" [disabled]="userForm.invalid">Save details</button>
+    </div>
+</form>
+    

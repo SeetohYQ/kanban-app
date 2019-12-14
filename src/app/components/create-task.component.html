@@ -1,0 +1,41 @@
+<div class="backdrop">
+    <div class="form-container">
+        <form [formGroup]="taskForm" (ngSubmit)="createTask()" class="form-design">
+            <h2>Create new task</h2>
+            <mat-form-field>
+                <input matInput placeholder="Title" formControlName="title"> 
+                <mat-error>Required field</mat-error>
+            </mat-form-field>
+
+            <mat-form-field>
+                <textarea matInput placeholder="Description (optional)" formControlName="description"></textarea>
+            </mat-form-field>
+
+            <div>
+                <span>Checklist<br></span>
+                <button mat-flat-button (click)="addToCheckList()" *ngIf="checkList.length === 0"
+                    class="btn-left-text">
+                    <mat-icon>add_circle_outline</mat-icon>
+                    <span>Add checklist</span>
+                </button>
+                <div formArrayName="checkList" *ngFor="let cl of checkList.controls; let i = index">
+                    <div style="display: flex; flex-direction: row;" [formGroup]="cl">
+                        <mat-checkbox formControlName="completed" color="primary"></mat-checkbox> 
+                        <input formControlName="list_item" matInput>
+                        <mat-icon (click)="deleteFromCheckList(i)">delete</mat-icon>
+                    </div>
+                </div>
+                <button mat-flat-button (click)="addToCheckList()" *ngIf="checkList.length > 0"
+                    class="btn-left-text">
+                    <mat-icon>add_circle_outline</mat-icon>
+                    <span>Next item</span>
+                </button>
+            </div>
+
+            <div class="form-actions">
+                <button mat-flat-button type="button" style="margin-right:2vw" [routerLink]="['/taskboards']">Cancel</button>
+                <button mat-flat-button color="primary" type="submit">Save</button>
+            </div>
+        </form>
+    </div>
+</div>

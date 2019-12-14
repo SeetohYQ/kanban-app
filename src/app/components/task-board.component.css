@@ -1,0 +1,64 @@
+h2 {
+    margin-left: 2vw;
+}
+
+.taskboard-header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-left: 2vw;
+    margin-right: 2vw;
+}
+
+.delete-tb-icon {
+    margin-top: 2vw;
+}
+
+.board-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+
+.task-board-planned {
+    background-color: white;
+    max-width: 30vw;
+    min-width: 30vw;
+    border-top: 2px solid tomato;
+}
+
+.task-board-inprogress {
+    background-color: white;
+    max-width: 30vw;
+    min-width: 30vw;
+    border-top: 2px solid rgb(247, 170, 82);
+}
+
+.task-board-completed {
+    background-color: white;
+    max-width: 30vw;
+    min-width: 30vw;
+    border-top: 2px solid teal;
+}
+
+.board-content {
+    margin-left: 2vw;
+    margin-right: 2vw;
+}
+
+.board-panel {
+    display: flex; 
+    flex-direction: row; 
+    justify-content: space-between;
+}
+
+.btn-add-task {
+    display: flex;
+    justify-content: center;
+    margin-top: 3vh;
+}
+
+.btn-add-task, button {
+    color: rgba(70, 199, 143, 1);
+}

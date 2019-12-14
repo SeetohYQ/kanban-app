@@ -1,0 +1,38 @@
+<form [formGroup]="userForm" (ngSubmit)="processForm()" class="form-container">
+    <button mat-raised-button [routerLink]="['../../']">Back</button>
+    <div class="img-container">
+        <img src="../../assets/app-logo.jpg" class="app-logo">
+    </div>
+    <div class="form-contents">
+        <h2 style="text-align: center;">Create account</h2>
+        <mat-form-field>
+            <input matInput formControlName="username" placeholder="Username">
+            <mat-error>Required field</mat-error>
+        </mat-form-field>
+
+        <mat-form-field>
+            <input matInput formControlName="password" placeholder="Password" type="password">
+            <mat-error>Required field</mat-error>
+        </mat-form-field>
+
+        <mat-form-field>
+            <input matInput formControlName="email" placeholder="Email">
+            <mat-error>Required field/invalid email</mat-error>
+        </mat-form-field>
+
+        <mat-form-field>
+            <mat-label>Team Name</mat-label>
+            <mat-select formControlName="teamName">
+                <mat-option *ngFor="let team of teams" [value]="team.team_id">{{team.team_name}}</mat-option>
+            </mat-select>
+            <mat-error>Required field</mat-error>
+        </mat-form-field>
+                
+        <mat-label>Profile picture (required)</mat-label>
+
+        <input type="file" formControlName="profilePic" accept="image/*" (change)="newFile($event)"/>
+        <img height="220" width="220" *ngIf="!!uploadedImageUrl" [attr.src]="uploadedImageUrl">
+        
+        <button mat-flat-button color="primary" type="submit" [disabled]="userForm.invalid">Create account</button>
+    </div>
+</form>

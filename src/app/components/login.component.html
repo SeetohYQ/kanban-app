@@ -1,0 +1,25 @@
+<div class="form-container">
+    <form [formGroup]="loginForm" (ngSubmit)="processLogin()" class="form-contents">
+        <h2 style="text-align: center;">Kanban - Boost team's productivity</h2>
+        <div class="img-container">
+            <img src="../../assets/app-logo.jpg" class="app-logo">
+        </div>
+        <div *ngIf="authenticationError" class="error-box">
+            Wrong username/password entered
+        </div>
+        <mat-form-field>
+            <input matInput formControlName="username" placeholder="username">
+            <mat-error>Required field</mat-error>
+        </mat-form-field>
+    
+        <mat-form-field>
+            <input matInput formControlName="password" placeholder="password" type="password">
+            <mat-error>Required field</mat-error>
+        </mat-form-field>
+    
+        <div class="btns-container">
+            <button mat-raised-button type="button" [routerLink]="['user','create']">Register</button>
+            <button mat-flat-button color="primary" type="submit" [disabled]="!loginForm.valid">Login</button>
+        </div>
+    </form>
+</div>

@@ -1,0 +1,37 @@
+.form-container {
+    position: fixed;
+    top: 20vh;
+    left: 30vw;
+    width: 40vw;
+    padding: 16px;
+    z-index: 100;
+    background: white;
+}
+
+.form-contents {
+    display: flex;
+    flex-direction: column;
+}
+
+.btns-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+}
+
+.error-box {
+    background-color: rgb(242, 242, 242);
+    text-align: center;
+    padding: 20px;
+    margin-bottom: 2vh;
+}
+
+.app-logo {
+    max-width: 30vw;
+    max-height: 30vh;
+}
+
+.img-container {
+    display: flex;
+    justify-content: center;
+}

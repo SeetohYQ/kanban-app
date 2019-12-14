@@ -1,0 +1,62 @@
+<div class="taskboard-header">
+    <form #f="ngForm" (ngSubmit)="updateTaskboardName(f)"> 
+        <mat-form-field>
+            <input matInput name="boardName" [(ngModel)]="boardName" required>
+            <mat-error>Required</mat-error>
+        </mat-form-field>
+        <button mat-button type="submit" [disabled]="!f.valid" *ngIf="f.dirty && boardName != taskBoard.board_name">
+            <mat-icon>done</mat-icon>
+        </button>
+    </form>
+    <mat-icon (click)="openDialog(taskBoard.board_id)" class="delete-tb-icon">delete</mat-icon>
+</div>
+<div class="board-container">
+    <div class="task-board-planned">
+        <div class="board-content">
+            <div class="board-panel">
+                <h3>PLANNED</h3>
+                <h3 *ngIf="plannedTasks.length > 0">({{plannedTasks.length}})</h3>
+            </div>
+
+            <app-task-card *ngFor="let task of plannedTasks" [task]="task"></app-task-card>
+
+            <div class="btn-add-task">
+                <button mat-flat-button (click)="addTask('planned',taskBoard.board_id)">
+                    <span>+ Add task</span>
+                </button>
+            </div>
+        </div>
+    </div>
+    <div class="task-board-inprogress">
+        <div class="board-content">
+            <div class="board-panel">
+                <h3>IN PROGRESS</h3>
+                <h3 *ngIf="wipTasks.length > 0">({{wipTasks.length}})</h3>
+            </div>
+           
+            <app-task-card *ngFor="let task of wipTasks" [task]="task"></app-task-card>
+
+            <div class="btn-add-task">
+                <button mat-flat-button (click)="addTask('wip',taskBoard.board_id)">
+                    <span>+ Add task</span>
+                </button>
+            </div>
+        </div>
+    </div>
+    <div class="task-board-completed">
+        <div class="board-content">
+            <div class="board-panel">
+                <h3>COMPLETED</h3>
+                <h3 *ngIf="completedTasks.length > 0">({{completedTasks.length}})</h3>
+            </div>
+
+            <app-task-card *ngFor="let task of completedTasks" [task]="task"></app-task-card>
+            
+            <div class="btn-add-task">
+                <button mat-flat-button (click)="addTask('completed',taskBoard.board_id)">
+                    <span>+ Add task</span>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
