@@ -1,6 +1,6 @@
 .form-container {
-    position: fixed;
-    top: 20vh;
+    position: relative;
+    top: 10vh;
     left: 30vw;
     width: 40vw;
     padding: 16px;
