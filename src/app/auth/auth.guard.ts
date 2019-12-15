@@ -15,8 +15,23 @@ export class AuthGuard implements CanActivate {
                                                                         | Promise<boolean | UrlTree>
                                                                         | Observable<boolean | UrlTree> 
     {
-        if (!!localStorage.getItem('user_data'))
+        if (this.authSvc.authenticated)
             return true;
+
+        if (!this.authSvc.authenticated && localStorage.getItem('user_data')) {
+            try {
+                //if any issue with local storage user_data like invalid format, and users keying in invalid format etc.
+                JSON.parse(localStorage.getItem('user_data')).username;
+                JSON.parse(localStorage.getItem('user_data')).team_id;
+                JSON.parse(localStorage.getItem('user_data')).profile_pic_url;
+                JSON.parse(localStorage.getItem('user_data')).token_type;
+                JSON.parse(localStorage.getItem('user_data')).access_token;
+            }
+            catch(e) {
+                return this.router.createUrlTree(['/']);
+            }
+            return true;
+        }
         return this.router.createUrlTree(['/']);
     }
 

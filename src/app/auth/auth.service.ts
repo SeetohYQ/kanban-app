@@ -38,7 +38,10 @@ export class AuthService {
                             token_type: result.token_type
                         }
 
+                        //to maintain session of authenticated users
                         localStorage.setItem('user_data', JSON.stringify(user));
+                        //to prevent malicious manual entering of user_data and gaining access to app
+                        this.authenticated = true;
                         //to time out user
                         this.tokenExpirationTimer = jwt_decode(user.access_token).exp;;
                         this.tokenStr = user.access_token;
@@ -49,6 +52,10 @@ export class AuthService {
                         return Promise.reject(false);
         })
     )}
+
+    verifyTokenStr(tokenStr: string) {
+        return this.http.get(`${this.serverUrl}/api/jwt/verify`).toPromise();
+    }
 
     autoLogout() {
         setTimeout(() => {
@@ -69,6 +76,7 @@ export class AuthService {
             .then(result => {
                 localStorage.removeItem('user_data');
                 localStorage.removeItem('updated_profile_pic');
+                this.authenticated = false;
                 this.router.navigate(['/']);
             })
             .catch(error => {

@@ -5,6 +5,7 @@ import { UserService } from './user.service';
 import { Router } from '@angular/router';
 import { MatSnackBar, ErrorStateMatcher } from '@angular/material';
 import { TaskboardsService } from './taskboards.service';
+import { HttpErrorResponse } from '@angular/common/http';
 
 class CrossFieldErrorMatcher implements ErrorStateMatcher {
   isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
@@ -46,7 +47,9 @@ export class UpdateUserComponent implements OnInit {
         this.currentProfilePic = result.profile_pic_url;
       })
       .catch(error => {
-        console.log(error);
+        if (error instanceof HttpErrorResponse && error.status === 401) 
+          //when tokens expire or fake tokens are manually entered
+          this.router.navigate(['/']);
       })
 
     this.userForm = this.fb.group({

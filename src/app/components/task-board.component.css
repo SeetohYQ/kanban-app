@@ -17,29 +17,29 @@ h2 {
 .board-container {
     display: flex;
     flex-direction: row;
-    justify-content: space-around;
     flex-wrap: wrap;
+    margin-left: 1vw;
 }
 
 .task-board-planned {
     background-color: white;
-    max-width: 30vw;
-    min-width: 30vw;
     border-top: 2px solid tomato;
+    min-width: 30vw;
+    margin: 1vw;
 }
 
 .task-board-inprogress {
     background-color: white;
-    max-width: 30vw;
-    min-width: 30vw;
     border-top: 2px solid rgb(247, 170, 82);
+    min-width: 30vw;
+    margin: 1vw;
 }
 
 .task-board-completed {
     background-color: white;
-    max-width: 30vw;
-    min-width: 30vw;
     border-top: 2px solid teal;
+    min-width: 30vw;
+    margin: 1vw;
 }
 
 .board-content {

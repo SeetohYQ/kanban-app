@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { environment } from '../../environments/environment';
 import { Socket } from 'ngx-socket-io';
 import { Observable, Subject } from 'rxjs';
+import { Router } from '@angular/router';
 
 @Injectable({
     providedIn: 'root'
@@ -16,7 +17,7 @@ export class TaskboardsService {
     teamProfiles: {username: string; profile_pic_url: string}[] = [];
     onReceiveTeamProfiles: Subject<{username: string; profile_pic_url: string}[]>= new Subject<{username: string; profile_pic_url: string}[]>();
 
-    constructor(private http: HttpClient, private socket: Socket) { }
+    constructor(private http: HttpClient, private socket: Socket, private router: Router) { }
 
     getData(request: string): Observable<any> {
         return this.observable = new Observable<any>((observer) => 
@@ -35,7 +36,7 @@ export class TaskboardsService {
                 this.onReceiveTeamProfiles.next(this.teamProfiles);
             })
             .catch(error => {
-                console.log(error);
+                this.router.navigate(['/']);
             });
     }
 

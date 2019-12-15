@@ -38,6 +38,8 @@ export class TaskBoardComponent implements OnInit {
       })
       this.boardName = this.taskBoard.board_name;
     }
+    //if no tasks still have to show board name
+    this.boardName = this.taskBoard.board_name;
   }
 
   addTask(status: string, board_id: number) {
