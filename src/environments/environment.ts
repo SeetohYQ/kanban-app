@@ -4,7 +4,7 @@
 
 export const environment = {
   //serverUri: 'http://localhost:3000',
-  serverUri: 'https://cors-anywhere.herokuapp.com/https://my-kanban-app-server.herokuapp.com',
+  serverUri: 'https://my-kanban-app-server.herokuapp.com',
   production: false
 };
 
